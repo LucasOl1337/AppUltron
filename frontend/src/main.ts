@@ -36,11 +36,48 @@ if (!app) {
   throw new Error("Missing #app container");
 }
 
+const toIsoDate = (date: Date): string => {
+  return date.toISOString().slice(0, 10);
+};
+
+const formatDateLabel = (date: Date): string => {
+  return date.toLocaleDateString("pt-BR", {
+    weekday: "short",
+    day: "2-digit",
+    month: "2-digit",
+  });
+};
+
+const buildDateOptions = (
+  daysAhead: number,
+): { value: string; label: string }[] => {
+  const options: { value: string; label: string }[] = [];
+  for (let dayOffset = 0; dayOffset < daysAhead; dayOffset += 1) {
+    const date = new Date();
+    date.setDate(date.getDate() + dayOffset);
+
+    let prefix = "";
+    if (dayOffset === 0) {
+      prefix = "Hoje";
+    } else if (dayOffset === 1) {
+      prefix = "Amanha";
+    }
+
+    const dateLabel = formatDateLabel(date).replace(".", "");
+    options.push({
+      value: toIsoDate(date),
+      label: prefix ? `${prefix} (${dateLabel})` : dateLabel,
+    });
+  }
+  return options;
+};
+
 const state = {
   token: localStorage.getItem("appultron-token") ?? "",
   user: null as User | null,
   selectedDoctorId: "" as string,
   activeTab: "consultas" as "consultas" | "exames",
+  selectedDate: toIsoDate(new Date()),
 };
 
 const apiFetch = async <T>(path: string, options?: RequestInit): Promise<T> => {
@@ -92,6 +129,7 @@ const dashboardTemplate = (
   exams: ExamResult[],
   doctors: Doctor[],
   selectedDoctor: Doctor | null,
+  dateOptions: { value: string; label: string }[],
 ) => `
   <main class="shell dashboard-shell">
     <section class="card dashboard">
@@ -166,7 +204,18 @@ const dashboardTemplate = (
                 )
                 .join("")}
             </select>
-            <input id="date-input" name="date" type="date" min="${new Date().toISOString().slice(0, 10)}" required />
+            <label for="date-select" class="field-label">Data da consulta</label>
+            <select id="date-select" name="date" required>
+              ${dateOptions
+                .map(
+                  (option) => `
+                    <option value="${option.value}" ${option.value === state.selectedDate ? "selected" : ""}>
+                      ${option.label}
+                    </option>
+                  `,
+                )
+                .join("")}
+            </select>
             <select id="time-select" name="time" required ${selectedDoctor ? "" : "disabled"}>
               <option value="">Selecione um horario</option>
               ${
@@ -312,6 +361,7 @@ const bindDashboardEvents = () => {
     document.querySelector<HTMLButtonElement>("#logout-button");
   const doctorSelect =
     document.querySelector<HTMLSelectElement>("#doctor-select");
+  const dateSelect = document.querySelector<HTMLSelectElement>("#date-select");
   const appointmentForm =
     document.querySelector<HTMLFormElement>("#appointment-form");
   const tabButtons =
@@ -335,6 +385,10 @@ const bindDashboardEvents = () => {
   doctorSelect?.addEventListener("change", () => {
     state.selectedDoctorId = doctorSelect.value;
     void renderDashboard();
+  });
+
+  dateSelect?.addEventListener("change", () => {
+    state.selectedDate = dateSelect.value;
   });
 
   appointmentForm?.addEventListener("submit", async (event) => {
@@ -399,6 +453,10 @@ const renderDashboard = async () => {
     if (!state.selectedDoctorId && doctors.length > 0) {
       state.selectedDoctorId = doctors[0].id;
     }
+    const dateOptions = buildDateOptions(14);
+    if (!dateOptions.some((option) => option.value === state.selectedDate)) {
+      state.selectedDate = dateOptions[0].value;
+    }
 
     const selectedDoctor = await loadDoctorById(state.selectedDoctorId);
 
@@ -408,6 +466,7 @@ const renderDashboard = async () => {
       exams,
       doctors,
       selectedDoctor,
+      dateOptions,
     );
     bindDashboardEvents();
   } catch {

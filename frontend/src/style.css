@@ -162,6 +162,12 @@ button.danger {
     gap: 8px;
 }
 
+.field-label {
+    font-size: 0.85rem;
+    color: #4e5d6f;
+    margin-top: 2px;
+}
+
 select {
     border: 1px solid #d3d9e0;
     border-radius: 8px;
