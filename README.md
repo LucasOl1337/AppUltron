@@ -1,0 +1,60 @@
+# AppUltron - Esqueleto Node + TypeScript
+
+Projeto inicial com frontend e backend separados para facilitar evolucao de design sem acoplar a API.
+Usuarios cadastrados ficam persistidos em `backend/data/users.json` (senha armazenada como hash).
+
+## Estrutura
+
+- `frontend`: site funcional (Vite + TypeScript) com cadastro, login, feed e curtidas.
+- `backend`: API modular (Express + TypeScript) com modulos `auth` e `interactions`.
+
+## Como rodar
+
+1. Instale dependencias:
+   - `npm install`
+   - `npm install --prefix backend`
+   - `npm install --prefix frontend`
+2. Configure backend:
+   - copie `backend/.env.example` para `backend/.env`
+3. Suba frontend + backend com launcher unico:
+   - `npm run dev`
+   - o launcher limpa automaticamente as portas `4000` e `5173` antes de iniciar
+
+Alternativa (separado em 2 terminais):
+
+- `npm run dev:backend`
+- `npm run dev:frontend`
+
+Frontend: `http://localhost:5173`  
+Backend: `http://localhost:4000/api`
+
+## Deploy rapido (gratis)
+
+### Backend (Render)
+
+1. Suba este projeto no GitHub.
+2. No Render, crie um novo `Blueprint` apontando para este repo (ele detecta `render.yaml`).
+3. Configure `CORS_ORIGIN` com a URL final do frontend (ex: `https://appultron.vercel.app`).
+4. Deploy.
+
+### Frontend (Vercel)
+
+1. Importe o repo no Vercel.
+2. Configure o `Root Directory` como `frontend`.
+3. Deploy.
+4. Depois do deploy, volte no Render e ajuste `CORS_ORIGIN` para a URL da Vercel.
+
+## Endpoints principais
+
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me` (Bearer token)
+- `GET /api/interactions` (Bearer token)
+- `POST /api/interactions` (Bearer token)
+- `POST /api/interactions/:postId/like` (Bearer token)
+- `GET /api/appointments/doctors` (Bearer token)
+- `GET /api/appointments/doctors/:doctorId` (Bearer token)
+- `GET /api/appointments/my` (Bearer token)
+- `POST /api/appointments` (Bearer token)
+- `DELETE /api/appointments/:appointmentId` (Bearer token, 1 dia e 3 horas de antecedencia)
+- `GET /api/exams/my` (Bearer token)

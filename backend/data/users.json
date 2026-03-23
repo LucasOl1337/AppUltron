@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "id": "659fdd1d-78b2-4296-8237-3083bb875479",
+      "name": "cavalo",
+      "email": "cavalo@gmail.com",
+      "passwordHash": "$2b$10$wX9Qyv.gNVq.o2yt9JxkrunoRRag4cb9liTYK0oR1jvpY.txMH5zO"
+    }
+  ]
+}
