@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { env } from "../../config/env.js";
 import { authRepository } from "./auth.repository.js";
 import { AuthPayload, PublicUser, User } from "./auth.types.js";
+import { examService } from "../exams/exam.service.js";
 
 type RegisterInput = {
   name: string;
@@ -20,7 +21,9 @@ type LoginInput = {
 class AuthService {
   private readonly tokenDuration = "1d";
 
-  async register(input: RegisterInput): Promise<{ user: PublicUser; token: string }> {
+  async register(
+    input: RegisterInput,
+  ): Promise<{ user: PublicUser; token: string }> {
     const existingUser = authRepository.findByEmail(input.email);
 
     if (existingUser) {
@@ -32,14 +35,15 @@ class AuthService {
       id: uuidv4(),
       name: input.name.trim(),
       email: input.email.toLowerCase().trim(),
-      passwordHash
+      passwordHash,
     };
 
     authRepository.save(user);
+    examService.createInitialResultsForUser(user.id);
 
     return {
       user: this.toPublicUser(user),
-      token: this.generateToken(user)
+      token: this.generateToken(user),
     };
   }
 
@@ -50,7 +54,10 @@ class AuthService {
       throw new Error("INVALID_CREDENTIALS");
     }
 
-    const isValidPassword = await bcrypt.compare(input.password, user.passwordHash);
+    const isValidPassword = await bcrypt.compare(
+      input.password,
+      user.passwordHash,
+    );
 
     if (!isValidPassword) {
       throw new Error("INVALID_CREDENTIALS");
@@ -58,7 +65,7 @@ class AuthService {
 
     return {
       user: this.toPublicUser(user),
-      token: this.generateToken(user)
+      token: this.generateToken(user),
     };
   }
 
@@ -80,10 +87,10 @@ class AuthService {
       {
         sub: user.id,
         email: user.email,
-        name: user.name
+        name: user.name,
       },
       env.JWT_SECRET,
-      { expiresIn: this.tokenDuration }
+      { expiresIn: this.tokenDuration },
     );
   }
 
@@ -91,7 +98,7 @@ class AuthService {
     return {
       id: user.id,
       name: user.name,
-      email: user.email
+      email: user.email,
     };
   }
 }

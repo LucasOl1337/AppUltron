@@ -7,5 +7,6 @@ const examRouter = Router();
 
 examRouter.use(authMiddleware);
 examRouter.get("/my", examController.listMyResults);
+examRouter.get("/:examId/pdf", examController.downloadMyExamPdf);
 
 export { examRouter };

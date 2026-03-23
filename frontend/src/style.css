@@ -157,6 +157,28 @@ button.danger {
     color: #5d6a7c;
 }
 
+.exam-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+
+.exam-badge.normal {
+    background: #e5f7ea;
+    color: #1f7d42;
+}
+
+.exam-badge.alerta {
+    background: #fdeaea;
+    color: #b73b3b;
+}
+
+.exam-pdf-button {
+    margin-top: 8px;
+    width: fit-content;
+}
+
 .appointment-form {
     display: grid;
     gap: 8px;

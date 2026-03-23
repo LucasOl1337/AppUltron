@@ -5,6 +5,12 @@
       "name": "cavalo",
       "email": "cavalo@gmail.com",
       "passwordHash": "$2b$10$wX9Qyv.gNVq.o2yt9JxkrunoRRag4cb9liTYK0oR1jvpY.txMH5zO"
+    },
+    {
+      "id": "3509b3ae-53ca-4d64-a7c4-67b68c03fe26",
+      "name": "luany",
+      "email": "luany@gmail.com",
+      "passwordHash": "$2b$10$G2jZ0oYbk35bSxIsGZWCxO/V5PLXkfWIr2QT3VcaKM69Jf8J5V.z6"
     }
   ]
 }

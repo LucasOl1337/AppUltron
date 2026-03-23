@@ -2,6 +2,7 @@
 
 Projeto inicial com frontend e backend separados para facilitar evolucao de design sem acoplar a API.
 Usuarios cadastrados ficam persistidos em `backend/data/users.json` (senha armazenada como hash).
+Exames ficam em `backend/data/exam-catalog.json` (catalogo de simulacao) e `backend/data/user-exams.json` (geracao por usuario).
 
 ## Estrutura
 
@@ -58,3 +59,4 @@ Backend: `http://localhost:4000/api`
 - `POST /api/appointments` (Bearer token)
 - `DELETE /api/appointments/:appointmentId` (Bearer token, 1 dia e 3 horas de antecedencia)
 - `GET /api/exams/my` (Bearer token)
+- `GET /api/exams/:examId/pdf` (Bearer token)

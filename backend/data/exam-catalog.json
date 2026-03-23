@@ -1,0 +1,133 @@
+{
+  "exames": [
+    {
+      "examName": "Hemograma Completo",
+      "category": "Sangue",
+      "status": "normal",
+      "resultSummary": "Serie vermelha, branca e plaquetas dentro da normalidade.",
+      "date": "2026-03-08",
+      "doctorName": "Marcelo",
+      "doctorSpecialty": "Clinico Geral",
+      "appointmentDate": "2026-03-05",
+      "labName": "Lab Vida",
+      "notes": "Manter rotina de hidratacao e acompanhamento anual.",
+      "metrics": [
+        {
+          "label": "Hemoglobina",
+          "value": "14.2 g/dL",
+          "reference": "13.0 - 17.0 g/dL"
+        },
+        {
+          "label": "Leucocitos",
+          "value": "6.100 /mm3",
+          "reference": "4.000 - 11.000 /mm3"
+        }
+      ]
+    },
+    {
+      "examName": "Glicemia em Jejum",
+      "category": "Metabolico",
+      "status": "alerta",
+      "resultSummary": "Valor em faixa limítrofe, recomendada reavaliacao.",
+      "date": "2026-03-09",
+      "doctorName": "Marcelo",
+      "doctorSpecialty": "Clinico Geral",
+      "appointmentDate": "2026-03-05",
+      "labName": "Lab Vida",
+      "notes": "Reduzir acucar simples e repetir exame em 60 dias.",
+      "metrics": [
+        {
+          "label": "Glicemia",
+          "value": "102 mg/dL",
+          "reference": "70 - 99 mg/dL"
+        }
+      ]
+    },
+    {
+      "examName": "Perfil Lipidico",
+      "category": "Cardiologia",
+      "status": "alerta",
+      "resultSummary": "LDL levemente acima da meta para prevencao primária.",
+      "date": "2026-03-11",
+      "doctorName": "Alexandre",
+      "doctorSpecialty": "Cardiologia",
+      "appointmentDate": "2026-03-07",
+      "labName": "Cardio Lab",
+      "notes": "Ajustar dieta e iniciar plano de atividade fisica.",
+      "metrics": [
+        {
+          "label": "Colesterol Total",
+          "value": "208 mg/dL",
+          "reference": "< 190 mg/dL"
+        },
+        {
+          "label": "LDL",
+          "value": "136 mg/dL",
+          "reference": "< 130 mg/dL"
+        }
+      ]
+    },
+    {
+      "examName": "TSH e T4 Livre",
+      "category": "Endocrino",
+      "status": "normal",
+      "resultSummary": "Perfil tireoidiano compativel com eutireoidismo.",
+      "date": "2026-03-06",
+      "doctorName": "Maria",
+      "doctorSpecialty": "Pediatria",
+      "appointmentDate": "2026-03-02",
+      "labName": "Lab Vida",
+      "notes": "Sem necessidade de ajuste medicamentoso no momento.",
+      "metrics": [
+        {
+          "label": "TSH",
+          "value": "2.1 uUI/mL",
+          "reference": "0.4 - 4.0 uUI/mL"
+        },
+        {
+          "label": "T4 Livre",
+          "value": "1.2 ng/dL",
+          "reference": "0.8 - 1.8 ng/dL"
+        }
+      ]
+    },
+    {
+      "examName": "Ferritina Serica",
+      "category": "Nutricao",
+      "status": "alerta",
+      "resultSummary": "Reserva de ferro abaixo da faixa ideal.",
+      "date": "2026-03-04",
+      "doctorName": "Maria",
+      "doctorSpecialty": "Pediatria",
+      "appointmentDate": "2026-03-01",
+      "labName": "Lab Vida",
+      "notes": "Aumentar ingestao de ferro e avaliar suplementacao.",
+      "metrics": [
+        {
+          "label": "Ferritina",
+          "value": "18 ng/mL",
+          "reference": "30 - 400 ng/mL"
+        }
+      ]
+    },
+    {
+      "examName": "Vitamina D (25-OH)",
+      "category": "Clinico",
+      "status": "normal",
+      "resultSummary": "Nivel adequado para manutencao.",
+      "date": "2026-03-03",
+      "doctorName": "Juliana",
+      "doctorSpecialty": "Dermatologia",
+      "appointmentDate": "2026-02-28",
+      "labName": "Derm Center Lab",
+      "notes": "Manter exposicao solar controlada e acompanhamento de rotina.",
+      "metrics": [
+        {
+          "label": "Vitamina D",
+          "value": "36 ng/mL",
+          "reference": "30 - 60 ng/mL"
+        }
+      ]
+    }
+  ]
+}

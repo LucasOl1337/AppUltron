@@ -25,9 +25,21 @@ type Appointment = {
 
 type ExamResult = {
   id: string;
+  userId: string;
   examName: string;
-  result: string;
+  category: string;
+  resultSummary: string;
   date: string;
+  doctorName: string;
+  doctorSpecialty: string;
+  appointmentDate: string;
+  labName: string;
+  notes: string;
+  metrics: Array<{
+    label: string;
+    value: string;
+    reference: string;
+  }>;
   status: "normal" | "alerta";
 };
 
@@ -98,6 +110,26 @@ const apiFetch = async <T>(path: string, options?: RequestInit): Promise<T> => {
   }
 
   return data as T;
+};
+
+const apiFetchBlob = async (
+  path: string,
+  options?: RequestInit,
+): Promise<Blob> => {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    ...options,
+    headers: {
+      ...(state.token ? { Authorization: `Bearer ${state.token}` } : {}),
+      ...(options?.headers ?? {}),
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message ?? "Erro ao baixar PDF");
+  }
+
+  return response.blob();
 };
 
 const authTemplate = () => `
@@ -178,9 +210,15 @@ const dashboardTemplate = (
                       .map(
                         (exam) => `
                         <article class="appointment-card">
-                          <strong>${exam.examName}</strong>
-                          <p>${exam.result}</p>
-                          <small>${exam.date.split("-").reverse().join("/")} - ${exam.status}</small>
+                          <div class="appointment-head">
+                            <strong>${exam.examName}</strong>
+                            <span class="exam-badge ${exam.status}">${exam.status}</span>
+                          </div>
+                          <p>${exam.resultSummary}</p>
+                          <small>Data: ${exam.date.split("-").reverse().join("/")}</small>
+                          <small>Consulta: ${exam.appointmentDate.split("-").reverse().join("/")} com ${exam.doctorName} (${exam.doctorSpecialty})</small>
+                          <small>Laboratorio: ${exam.labName}</small>
+                          <button class="secondary exam-pdf-button" data-exam-id="${exam.id}">Abrir PDF</button>
                         </article>
                       `,
                       )
@@ -434,6 +472,28 @@ const bindDashboardEvents = () => {
           );
           setFeedback("Consulta cancelada com sucesso.");
           await renderDashboard();
+        } catch (error) {
+          if (error instanceof Error) {
+            setFeedback(error.message);
+          }
+        }
+      });
+    });
+
+  document
+    .querySelectorAll<HTMLButtonElement>(".exam-pdf-button")
+    .forEach((button) => {
+      button.addEventListener("click", async () => {
+        const examId = button.dataset.examId;
+        if (!examId) {
+          return;
+        }
+
+        try {
+          const pdfBlob = await apiFetchBlob(`/exams/${examId}/pdf`);
+          const objectUrl = URL.createObjectURL(pdfBlob);
+          window.open(objectUrl, "_blank", "noopener,noreferrer");
+          setTimeout(() => URL.revokeObjectURL(objectUrl), 60000);
         } catch (error) {
           if (error instanceof Error) {
             setFeedback(error.message);
