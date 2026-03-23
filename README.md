@@ -42,8 +42,10 @@ Backend: `http://localhost:4000/api`
 
 1. Importe o repo no Vercel.
 2. Configure o `Root Directory` como `frontend`.
-3. Deploy.
-4. Depois do deploy, volte no Render e ajuste `CORS_ORIGIN` para a URL da Vercel.
+3. Em `Environment Variables`, configure:
+   - `VITE_API_URL=https://SEU-BACKEND.onrender.com/api`
+4. Deploy.
+5. Depois do deploy, volte no Render e ajuste `CORS_ORIGIN` para a URL da Vercel.
 
 ## Endpoints principais
 

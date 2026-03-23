@@ -43,7 +43,16 @@ type ExamResult = {
   status: "normal" | "alerta";
 };
 
-const API_BASE_URL = "http://localhost:4000/api";
+const resolveApiBaseUrl = (): string => {
+  const fromEnv = import.meta.env.VITE_API_URL as string | undefined;
+  if (fromEnv && fromEnv.trim()) {
+    return fromEnv.replace(/\/+$/, "");
+  }
+
+  return "http://localhost:4000/api";
+};
+
+const API_BASE_URL = resolveApiBaseUrl();
 const app = document.querySelector<HTMLDivElement>("#app");
 
 if (!app) {

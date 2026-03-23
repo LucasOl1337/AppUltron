@@ -1,3 +1,123 @@
 {
-  "users": {}
+  "users": {
+    "85eba971-46c5-4faf-8bf1-31faa2265972": [
+      {
+        "id": "349f4694-1d7d-46e8-96a3-5bc42df54b7e",
+        "userId": "85eba971-46c5-4faf-8bf1-31faa2265972",
+        "examName": "Ferritina Serica",
+        "category": "Nutricao",
+        "status": "alerta",
+        "resultSummary": "Reserva de ferro abaixo da faixa ideal.",
+        "date": "2026-03-04",
+        "doctorName": "Maria",
+        "doctorSpecialty": "Pediatria",
+        "appointmentDate": "2026-03-01",
+        "labName": "Lab Vida",
+        "notes": "Aumentar ingestao de ferro e avaliar suplementacao.",
+        "metrics": [
+          {
+            "label": "Ferritina",
+            "value": "18 ng/mL",
+            "reference": "30 - 400 ng/mL"
+          }
+        ]
+      },
+      {
+        "id": "43880312-05d0-40d4-84e1-f91acc66665c",
+        "userId": "85eba971-46c5-4faf-8bf1-31faa2265972",
+        "examName": "Vitamina D (25-OH)",
+        "category": "Clinico",
+        "status": "normal",
+        "resultSummary": "Nivel adequado para manutencao.",
+        "date": "2026-03-03",
+        "doctorName": "Juliana",
+        "doctorSpecialty": "Dermatologia",
+        "appointmentDate": "2026-02-28",
+        "labName": "Derm Center Lab",
+        "notes": "Manter exposicao solar controlada e acompanhamento de rotina.",
+        "metrics": [
+          {
+            "label": "Vitamina D",
+            "value": "36 ng/mL",
+            "reference": "30 - 60 ng/mL"
+          }
+        ]
+      },
+      {
+        "id": "4d7846c1-daef-4622-ba7c-596897612658",
+        "userId": "85eba971-46c5-4faf-8bf1-31faa2265972",
+        "examName": "Perfil Lipidico",
+        "category": "Cardiologia",
+        "status": "alerta",
+        "resultSummary": "LDL levemente acima da meta para prevencao primária.",
+        "date": "2026-03-11",
+        "doctorName": "Alexandre",
+        "doctorSpecialty": "Cardiologia",
+        "appointmentDate": "2026-03-07",
+        "labName": "Cardio Lab",
+        "notes": "Ajustar dieta e iniciar plano de atividade fisica.",
+        "metrics": [
+          {
+            "label": "Colesterol Total",
+            "value": "208 mg/dL",
+            "reference": "< 190 mg/dL"
+          },
+          {
+            "label": "LDL",
+            "value": "136 mg/dL",
+            "reference": "< 130 mg/dL"
+          }
+        ]
+      }
+    ],
+    "659fdd1d-78b2-4296-8237-3083bb875479": [
+      {
+        "id": "98a80c52-6255-4c81-b723-eb4f5e72e689",
+        "userId": "659fdd1d-78b2-4296-8237-3083bb875479",
+        "examName": "Perfil Lipidico",
+        "category": "Cardiologia",
+        "status": "alerta",
+        "resultSummary": "LDL levemente acima da meta para prevencao primária.",
+        "date": "2026-03-11",
+        "doctorName": "Alexandre",
+        "doctorSpecialty": "Cardiologia",
+        "appointmentDate": "2026-03-07",
+        "labName": "Cardio Lab",
+        "notes": "Ajustar dieta e iniciar plano de atividade fisica.",
+        "metrics": [
+          {
+            "label": "Colesterol Total",
+            "value": "208 mg/dL",
+            "reference": "< 190 mg/dL"
+          },
+          {
+            "label": "LDL",
+            "value": "136 mg/dL",
+            "reference": "< 130 mg/dL"
+          }
+        ]
+      },
+      {
+        "id": "05fea309-67d8-4181-9997-1a7d709cbabd",
+        "userId": "659fdd1d-78b2-4296-8237-3083bb875479",
+        "examName": "Vitamina D (25-OH)",
+        "category": "Clinico",
+        "status": "normal",
+        "resultSummary": "Nivel adequado para manutencao.",
+        "date": "2026-03-03",
+        "doctorName": "Juliana",
+        "doctorSpecialty": "Dermatologia",
+        "appointmentDate": "2026-02-28",
+        "labName": "Derm Center Lab",
+        "notes": "Manter exposicao solar controlada e acompanhamento de rotina.",
+        "metrics": [
+          {
+            "label": "Vitamina D",
+            "value": "36 ng/mL",
+            "reference": "30 - 60 ng/mL"
+          }
+        ]
+      }
+    ]
+  }
 }
