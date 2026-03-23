@@ -9,6 +9,7 @@ type User = {
 type Doctor = {
   id: string;
   name: string;
+  specialty: string;
   availableSlots: string[];
 };
 
@@ -16,6 +17,7 @@ type Appointment = {
   id: string;
   doctorId: string;
   doctorName: string;
+  doctorSpecialty: string;
   date: string;
   time: string;
   startAt: string;
@@ -158,7 +160,7 @@ const dashboardTemplate = (
                         (appointment) => `
                         <article class="appointment-card">
                           <div class="appointment-head">
-                            <strong>${appointment.doctorName}</strong>
+                            <strong>${appointment.doctorName} - ${appointment.doctorSpecialty}</strong>
                             <button class="danger" data-cancel-id="${appointment.id}">Cancelar</button>
                           </div>
                           <small>${appointment.date.split("-").reverse().join("/")} as ${appointment.time}</small>
@@ -198,7 +200,7 @@ const dashboardTemplate = (
                 .map(
                   (doctor) => `
                     <option value="${doctor.id}" ${doctor.id === state.selectedDoctorId ? "selected" : ""}>
-                      ${doctor.name}
+                      ${doctor.name} - ${doctor.specialty}
                     </option>
                   `,
                 )
@@ -239,6 +241,7 @@ const dashboardTemplate = (
               ? `
               <article class="doctor-details">
                 <strong>${selectedDoctor.name}</strong>
+                <small>Especialidade: ${selectedDoctor.specialty}</small>
                 <small>Horarios disponiveis: ${selectedDoctor.availableSlots.length}</small>
               </article>
             `

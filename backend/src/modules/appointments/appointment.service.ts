@@ -65,6 +65,7 @@ class AppointmentService {
       userName: input.userName,
       doctorId: doctor.id,
       doctorName: doctor.name,
+      doctorSpecialty: doctor.specialty,
       date: normalizedDate,
       time: normalizedTime,
       startAt: appointmentDate.toISOString(),

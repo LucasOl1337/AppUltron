@@ -1,54 +1,17 @@
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import { Appointment, Doctor } from "./appointment.types.js";
 
 class AppointmentRepository {
-  private readonly doctors: Doctor[] = [
-    {
-      id: "doc-1",
-      name: "Marcelo",
-      availableSlots: [
-        "08:00",
-        "09:00",
-        "10:00",
-        "11:00",
-        "14:00",
-        "15:00",
-        "16:00",
-      ],
-    },
-    {
-      id: "doc-2",
-      name: "Maria",
-      availableSlots: ["08:30", "09:30", "10:30", "13:30", "14:30", "15:30"],
-    },
-    {
-      id: "doc-3",
-      name: "Alexandre",
-      availableSlots: [
-        "07:00",
-        "08:00",
-        "09:00",
-        "10:00",
-        "13:00",
-        "14:00",
-        "15:00",
-      ],
-    },
-    {
-      id: "doc-4",
-      name: "Juliana",
-      availableSlots: [
-        "09:00",
-        "10:00",
-        "11:00",
-        "12:00",
-        "15:00",
-        "16:00",
-        "17:00",
-      ],
-    },
-  ];
+  private readonly doctors: Doctor[];
 
   private appointments: Appointment[] = [];
+
+  constructor() {
+    this.doctors = this.loadDoctorsFromJson();
+  }
 
   listDoctors(): Doctor[] {
     return this.doctors;
@@ -92,6 +55,31 @@ class AppointmentRepository {
       (appointment) => appointment.id !== appointmentId,
     );
     return this.appointments.length < previousLength;
+  }
+
+  private loadDoctorsFromJson(): Doctor[] {
+    type SourceDoctor = {
+      nome: string;
+      especialidade: string;
+      horarios: string[];
+    };
+
+    type SourceDb = {
+      medicos: SourceDoctor[];
+    };
+
+    const currentFilePath = fileURLToPath(import.meta.url);
+    const currentDir = path.dirname(currentFilePath);
+    const dbPath = path.resolve(currentDir, "../../../data/agendamentos.json");
+    const rawDb = fs.readFileSync(dbPath, "utf-8");
+    const parsedDb = JSON.parse(rawDb) as SourceDb;
+
+    return parsedDb.medicos.map((medico, index) => ({
+      id: `doc-${index + 1}`,
+      name: medico.nome,
+      specialty: medico.especialidade,
+      availableSlots: medico.horarios,
+    }));
   }
 }
 

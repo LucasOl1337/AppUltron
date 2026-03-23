@@ -182,6 +182,11 @@ select {
     color: #2b3a4e;
 }
 
+.doctor-details small {
+    display: block;
+    margin-top: 4px;
+}
+
 .empty-state {
     color: #5b6672;
     margin-top: 2px;

@@ -1,6 +1,7 @@
 export type Doctor = {
   id: string;
   name: string;
+  specialty: string;
   availableSlots: string[];
 };
 
@@ -10,6 +11,7 @@ export type Appointment = {
   userName: string;
   doctorId: string;
   doctorName: string;
+  doctorSpecialty: string;
   date: string;
   time: string;
   startAt: string;
