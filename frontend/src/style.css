@@ -139,17 +139,16 @@ a {
 
 .rail-word {
   position: absolute;
-  inset: 0 0 0 auto;
-  display: grid;
-  place-items: center;
-  padding-right: 1.2rem;
+  top: 50%;
+  right: -3.25rem;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center;
+  white-space: nowrap;
   color: rgba(255, 255, 255, 0.98);
-  font-size: clamp(4rem, 10vw, 8rem);
-  line-height: 0.9;
+  font-size: clamp(3rem, 6vw, 5.2rem);
+  line-height: 1;
   font-weight: 900;
   letter-spacing: -0.08em;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
   text-transform: lowercase;
   text-shadow: 0 14px 20px rgba(0, 0, 0, 0.08);
   opacity: 0.98;
@@ -323,7 +322,7 @@ a {
 
 .doctor-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-top: 26px;
 }
@@ -331,6 +330,7 @@ a {
 .doctor-card {
   display: grid;
   gap: 14px;
+  min-height: 244px;
   padding: 18px;
   border-radius: 26px;
   background: linear-gradient(180deg, #eaf0ff 0%, #dfe7ff 100%);
@@ -414,6 +414,18 @@ a {
 
 .doctor-action.active {
   box-shadow: 0 16px 28px rgba(47, 103, 255, 0.3);
+}
+
+@media (min-width: 1580px) {
+  .doctor-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1140px) {
+  .doctor-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .schedule-panel {
