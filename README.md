@@ -47,6 +47,36 @@ Backend: `http://localhost:4000/api`
 4. Deploy.
 5. Depois do deploy, volte no Render e ajuste `CORS_ORIGIN` para a URL da Vercel.
 
+### AWS (um unico container)
+
+Esse repo agora pode subir como uma unica imagem Docker:
+
+1. O backend serve o `frontend/dist` quando ele existe.
+2. O frontend usa `/api` por padrao, entao o mesmo host responde site e API.
+3. O `Dockerfile` da raiz prepara a imagem para `AWS App Runner`, `Elastic Beanstalk` ou `EC2`.
+
+Variaveis importantes:
+
+- `PORT`: a porta do container; no AWS App Runner normalmente vem do ambiente do servico.
+- `JWT_SECRET`: defina um valor forte em producao.
+- `CORS_ORIGIN`: use a URL publica final do servico, ou o dominio customizado quando existir.
+
+Observacao:
+
+- A persistencia atual ainda e baseada em arquivos locais em `backend/data`. Para dados duraveis no AWS, o proximo passo e migrar isso para S3, EFS ou banco gerenciado.
+
+### AWS Amplify + backend separado
+
+Se você quiser usar o Amplify para a camada visual, o fluxo recomendado é:
+
+1. Deploy do backend em um serviço HTTP da AWS, como App Runner.
+2. Deploy do `frontend` no Amplify usando o `amplify.yml` da raiz.
+3. Configurar `VITE_API_URL` no Amplify com a URL pública do backend.
+
+Observação:
+
+- O Amplify hospeda bem o frontend estático, mas este projeto não coloca o backend Express dentro do Amplify sem uma adaptação maior da arquitetura.
+
 ## Endpoints principais
 
 - `POST /api/auth/register`
