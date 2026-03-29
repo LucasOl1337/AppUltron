@@ -28,4 +28,4 @@ WORKDIR /app/backend
 
 EXPOSE 8080
 
-CMD ["npm", "start"]
+CMD ["node", "dist/server.js"]
