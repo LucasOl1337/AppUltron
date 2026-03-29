@@ -62,6 +62,7 @@ a {
 
 .scene {
   position: relative;
+  display: flex;
   min-height: calc(100vh - 36px);
   border-radius: 34px;
   overflow: hidden;
@@ -72,13 +73,15 @@ a {
 .scene-content {
   position: relative;
   z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   min-height: inherit;
   padding: clamp(20px, 2.6vw, 40px);
 }
 
 .scene-rail {
-  position: absolute;
-  inset: 0 0 0 auto;
+  position: relative;
+  flex: 0 0 min(28vw, 440px);
   width: min(28vw, 440px);
   background: var(--blue);
   overflow: hidden;
@@ -351,16 +354,20 @@ a {
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
+  overflow: hidden;
   background:
-    radial-gradient(circle at 34% 32%, rgba(255, 255, 255, 0.95) 0 22%, transparent 23%),
-    linear-gradient(135deg, rgba(31, 91, 255, 0.2), rgba(31, 91, 255, 0.55)),
-    var(--doctor-accent);
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 900;
+    linear-gradient(135deg, rgba(31, 91, 255, 0.12), rgba(31, 91, 255, 0.48)),
+    #e4ebff;
   box-shadow: inset 0 0 0 7px rgba(255, 255, 255, 0.42);
+}
+
+.doctor-photo,
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .doctor-copy {
@@ -523,12 +530,8 @@ a {
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: #dfe8ff;
-  color: var(--ink);
-  font-weight: 900;
   overflow: hidden;
+  background: #dfe8ff;
 }
 
 .summary-avatar svg {
@@ -762,6 +765,7 @@ a {
   }
 
   .scene-rail {
+    flex-basis: 240px;
     width: 240px;
     opacity: 0.14;
     pointer-events: none;
@@ -772,7 +776,7 @@ a {
   }
 
   .doctor-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -844,5 +848,9 @@ a {
 
   .scene-rail {
     display: none;
+  }
+
+  .doctor-grid {
+    grid-template-columns: 1fr;
   }
 }

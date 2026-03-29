@@ -10,6 +10,7 @@ type Doctor = {
   id: string;
   name: string;
   specialty: string;
+  avatarUrl: string;
   availableSlots: string[];
 };
 
@@ -327,7 +328,9 @@ const renderDoctorCards = (doctors: Doctor[]) => `
         return `
           <article class="doctor-card ${selected ? "selected" : ""}" style="--doctor-accent: ${doctorAccent[index % doctorAccent.length]};">
             <div class="doctor-top">
-              <div class="doctor-avatar">${escapeHtml(initials(doctor.name))}</div>
+              <div class="doctor-avatar">
+                <img class="doctor-photo" src="${escapeHtml(doctor.avatarUrl)}" alt="Foto de ${escapeHtml(doctor.name)}" loading="lazy" />
+              </div>
               <div class="doctor-copy">
                 <p class="doctor-name">${escapeHtml(doctor.name)}</p>
                 <p class="doctor-specialty">${escapeHtml(doctor.specialty)}</p>
@@ -426,7 +429,9 @@ const renderSchedulePanel = (
 
       <form id="appointment-form" class="confirm-form">
         <article class="appointment-summary">
-          <div class="summary-avatar">${escapeHtml(initials(selectedDoctor.name))}</div>
+          <div class="summary-avatar">
+            <img class="avatar-image" src="${escapeHtml(selectedDoctor.avatarUrl)}" alt="Foto de ${escapeHtml(selectedDoctor.name)}" loading="lazy" />
+          </div>
           <div class="summary-copy">
             <strong>${escapeHtml(selectedDoctor.name)}</strong>
             <small>${escapeHtml(selectedDoctor.specialty)}</small>

@@ -57,6 +57,21 @@ class AppointmentRepository {
     return this.appointments.length < previousLength;
   }
 
+  private resolveDoctorAvatarUrl(name: string): string {
+    const avatars: Record<string, string> = {
+      Marcelo:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      Juliana:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+      Maria:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&q=80",
+      Alexandre:
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80",
+    };
+
+    return avatars[name] ?? avatars.Marcelo;
+  }
+
   private loadDoctorsFromJson(): Doctor[] {
     type SourceDoctor = {
       nome: string;
@@ -78,6 +93,7 @@ class AppointmentRepository {
       id: `doc-${index + 1}`,
       name: medico.nome,
       specialty: medico.especialidade,
+      avatarUrl: this.resolveDoctorAvatarUrl(medico.nome),
       availableSlots: medico.horarios,
     }));
   }
